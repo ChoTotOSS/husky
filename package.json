@@ -1,6 +1,6 @@
 {
-  "name": "husky",
-  "version": "4.3.8",
+  "name": "@chotot/husky",
+  "version": "4.3.8-beta.0",
   "description": "Prevents bad commit or push (git hooks, pre-commit/precommit, pre-push/prepush, post-merge/postmerge and all that stuff...)",
   "bin": {
     "husky-run": "./bin/run.js",
@@ -43,11 +43,14 @@
     "lint"
   ],
   "author": "Typicode <typicode@gmail.com>",
+  "contributors": [
+    "Thanh Tran <thanhtran@chotot.vn> (https://chotot.com)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/typicode/husky/issues"
+    "url": "https://github.com/chototoss/husky/issues"
   },
-  "homepage": "https://github.com/typicode/husky#readme",
+  "homepage": "https://github.com/chototoss/husky#readme",
   "dependencies": {
     "chalk": "^4.0.0",
     "ci-info": "^2.0.0",
@@ -103,13 +106,5 @@
       "json",
       "node"
     ]
-  },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/husky"
-  },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/husky"
   }
 }
