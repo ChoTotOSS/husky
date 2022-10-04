@@ -20,9 +20,10 @@ function checkSkipInstallEnv(): void {
   }
 }
 
-function getDirs(
-  cwd: string
-): { absoluteGitCommonDir: string; relativeUserPkgDir: string } {
+function getDirs(cwd: string): {
+  absoluteGitCommonDir: string
+  relativeUserPkgDir: string
+} {
   const { prefix, gitCommonDir } = gitRevParse(cwd)
 
   debug('Git rev-parse command returned:')
@@ -38,7 +39,7 @@ function getDirs(
 
 // Get INIT_CWD env variable
 function getInitCwdEnv(): string {
-  const { INIT_CWD } = process.env
+  const { INIT_CWD = process.cwd() } = process.env
 
   if (INIT_CWD === undefined) {
     const { name, version } = whichPMRuns()
@@ -47,8 +48,7 @@ function getInitCwdEnv(): string {
 
 Alternatively, you could set it manually:
 INIT_CWD="$(pwd)" npm install husky --save-dev
-
-Or upgrade to husky v5`
+`
     )
   }
 

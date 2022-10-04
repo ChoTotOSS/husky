@@ -1,8 +1,9 @@
 {
   "name": "@chotot/husky",
-  "version": "4.3.9",
+  "version": "4.4.0",
   "description": "Prevents bad commit or push (git hooks, pre-commit/precommit, pre-push/prepush, post-merge/postmerge and all that stuff...)",
   "bin": {
+    "husky": "./husky.js",
     "husky-run": "./bin/run.js",
     "husky-upgrade": "./lib/upgrader/bin.js"
   },
@@ -20,8 +21,7 @@
     "postpublish": "pinst --disable",
     "lint": "eslint . --ext .js,.ts --ignore-path .gitignore",
     "fix": "npm run lint -- --fix",
-    "doc": "markdown-toc -i README.md",
-    "_postinstall": "opencollective-postinstall || exit 0"
+    "doc": "markdown-toc -i README.md"
   },
   "repository": {
     "type": "git",

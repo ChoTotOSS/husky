@@ -1,19 +1,30 @@
-# @chotot/husky
+# @chotot/husky - Git Hooks for Chotot Web Projects
 
-> Git hooks made easy
+> Forked from the renowned tool [Husky](https://github.com/typicode/husky) to skip another [dotfile](https://blog.typicode.com/husky-git-hooks-javascript-config/) being added to the project's repo.
 
 Husky can prevent bad `git commit`, `git push` and more 🐶 _woof!_
 
-**Note to pnpm > v6 users**: this fork was patched to be compatible with `pnpm` >= `v6`.
+### IMPORTANT:
 
-**Note to npm v7 users**: if hooks aren't being installed with npm `v7`, check that your version is at least `v7.1.2`.
+#### pnpm users:
+
+- Husky's postinstall setup script **will not always run automatically** due to pnpm super fast cached installation. It is recommended to include a `prepare: "husky install"` in your repo's root `package.json` scripts.
+- This fork was patched to be compatible with `pnpm` >= `v6`.
+
+#### npm users:
+
+- **npm v7 users**: if hooks aren't being installed with npm `v7`, check that your version is at least `v7.1.2`.
 
 ## Install
 
 This will install @chotot/husky.
 
 ```sh
+# npm
 npm install @chotot/husky --save-dev
+
+# pnpm
+pnpm add --save-dev @chotot/husky
 ```
 
 ```js
@@ -37,7 +48,7 @@ _Existing hooks are kept. Requires Node `>= 10` and Git `>= 2.13.0`._
 
 ## Reinstall
 
-If Husky is already in your `node_modules` or `pnp.js` (Yarn 2) and you want to reinstall hooks, you can run `npm rebuild` or `yarn rebuild`.
+If Husky is already in your `node_modules` and you want to reinstall hooks, you can run `npx husky install` or `pnpm exec husky install`.
 
 ## Uninstall
 
@@ -51,61 +62,25 @@ _Git hooks installed by husky will be removed._
 
 <!-- toc -->
 
-- [Upgrading from 0.14](#upgrading-from-014)
-- [Supported hooks](#supported-hooks)
-- [Access Git params and stdin](#access-git-params-and-stdin)
-- [Skip all hooks (rebase)](#skip-all-hooks-rebase)
-- [Disable auto-install](#disable-auto-install)
-- [CI servers](#ci-servers)
-- [Monorepos](#monorepos)
-- [Node version managers](#node-version-managers)
-- [Local commands (~/.huskyrc)](#local-commands-huskyrc)
-- [Multiple commands](#multiple-commands)
-- [Troubleshoot](#troubleshoot)
-  - [Debug messages](#debug-messages)
-  - [Hooks aren't running](#hooks-arent-running)
-  - [Commits aren't blocked](#commits-arent-blocked)
-  - [Commits are slow](#commits-are-slow)
-  - [Testing husky in a new repo](#testing-husky-in-a-new-repo)
-  - [ENOENT error 'node_modules/husky/.git/hooks'](#enoent-error-node_moduleshuskygithooks)
+* [Supported hooks](#supported-hooks)
+* [Access Git params and stdin](#access-git-params-and-stdin)
+* [Skip all hooks (rebase)](#skip-all-hooks-(rebase))
+* [Disable auto-install](#disable-auto-install)
+* [CI servers](#ci-servers)
+* [Monorepos](#monorepos)
+* [Node version managers](#node-version-managers)
+* [Local commands (~/.huskyrc)](#local-commands-(~/.huskyrc))
+* [Multiple commands](#multiple-commands)
+* [Troubleshoot](#troubleshoot)
+  * [Debug messages](#debug-messages)
+  * [Hooks aren't running](#hooks-aren't-running)
+  * [Hooks aren't running with git 2.9+](#hooks-aren't-running-with-git-2.9+)
+  * [Commits aren't blocked](#commits-aren't-blocked)
+  * [Commits are slow](#commits-are-slow)
+  * [Testing husky in a new repo](#testing-husky-in-a-new-repo)
+  * [ENOENT error 'node_modules/husky/.git/hooks'](#enoent-error-'node_modules/husky/.git/hooks')
 
 <!-- tocstop -->
-
-### Upgrading from 0.14
-
-Run `husky-upgrade` to automatically upgrade your configuration:
-
-```
-npx --no-install husky-upgrade
-```
-
-You can also do it manually. Move your existing hooks to `husky.hooks` field and use raw Git hooks names. Also, if you were using `GIT_PARAMS` env variable, rename it to `HUSKY_GIT_PARAMS`.
-
-```diff
-{
-  "scripts": {
--   "precommit": "npm test",
--   "commitmsg": "commitlint -E GIT_PARAMS"
-  },
-+ "husky": {
-+   "hooks": {
-+     "pre-commit": "npm test",
-+     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-+   }
-+ }
-}
-```
-
-Starting with `1.0.0`, husky can be configured using `.huskyrc`, `.huskyrc.json`, `.huskyrc.yaml`, `.huskyrc.yml`, `.huskyrc.js` or `husky.config.js` file.
-
-```js
-// .huskyrc
-{
-  "hooks": {
-    "pre-commit": "npm test"
-  }
-}
-```
 
 ### Supported hooks
 
@@ -243,6 +218,13 @@ husky > Setting up git hooks
 husky > Done
 ```
 
+#### Hooks aren't running with git 2.9+
+
+Check if there's `core.hooksPath` config defined in your repo `.git/config` file. In that case, either:
+
+- If the `hooksPath` config was added accidentally, (likely via `npx husky-init`), remove that line in `.git/config` file.
+- If `hooksPath` was added by another tool that you are aware of, then it's better to install and use the official [Husky package](https://github.com/typicode/husky)
+
 #### Commits aren't blocked
 
 For a commit to be blocked, `pre-commit` script must exit with a non-zero exit code. If you commit isn't blocked, check your script exit code.
@@ -272,14 +254,10 @@ Verify that your version of Git is `>=2.13.0`.
 
 ## See also
 
-- [pkg-ok](https://github.com/typicode/pkg-ok) - Prevents publishing a module with bad paths or incorrect line endings
-- [please-upgrade-node](https://github.com/typicode/please-upgrade-node) - Show a message to upgrade Node instead of a stacktrace in your CLIs
-- [pinst](https://github.com/typicode/pinst) - dev only postinstall hook
-
-## Patreon
-
-People and companies supporting via Patreon: [thanks](https://thanks.typicode.com)
+- [Typicode's husky](https://github.com/typicode/husky) - The original Husky tool
+- [Chotot's Web Standards](https://github.com/chototoss/chotot-web-standards) - Chotot's Web Standards
 
 ## License
 
 MIT
+
