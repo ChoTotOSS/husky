@@ -18,13 +18,11 @@ function getGitHooksDir(gitDir: string): string {
 
 export function install({
   absoluteGitCommonDir,
-  relativeUserPkgDir,
   userPkgDir,
   pmName, // package manager name
   isCI, // running in CI or not
 }: {
   absoluteGitCommonDir: string
-  relativeUserPkgDir: string
   userPkgDir: string
   pmName: string
   isCI: boolean
@@ -53,7 +51,7 @@ export function install({
 
   debug(`Installing hooks in ${gitHooksDir}`)
   createHooks(gitHooksDir)
-  createLocalScript(gitHooksDir, pmName, relativeUserPkgDir)
+  createLocalScript(gitHooksDir, pmName)
   createMainScript(gitHooksDir)
 }
 

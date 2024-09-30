@@ -18,18 +18,15 @@ const pkg = JSON.stringify({})
 // Helpers
 function install({
   gitCommonDir = '.git',
-  relativeUserPkgDir = '.',
   userPkgDir = '.',
   isCI = false,
 }: {
   gitCommonDir?: string
-  relativeUserPkgDir?: string
   userPkgDir?: string
   isCI?: boolean
 } = {}): void {
   installer.install({
     absoluteGitCommonDir: path.join(tempDir, gitCommonDir),
-    relativeUserPkgDir,
     userPkgDir: path.join(tempDir, userPkgDir),
     pmName: 'npm',
     isCI,
@@ -164,21 +161,22 @@ describe('install', (): void => {
     expect(exists('.git/hooks/pre-commit')).toBeTruthy()
   })
 
-  it('should support package.json installed in sub directory', (): void => {
-    const relativeUserPkgDir = 'A/B/'
-    mkdir([relativeUserPkgDir])
-    writeFile('A/B/package.json', pkg)
+  // Temporarily disable support for sub directory to fix husky issue within monorepo.
+  // it('should support package.json installed in sub directory', (): void => {
+  //   const relativeUserPkgDir = 'A/B/'
+  //   mkdir([relativeUserPkgDir])
+  //   writeFile('A/B/package.json', pkg)
 
-    install({ relativeUserPkgDir, userPkgDir: relativeUserPkgDir })
-    const localScript = readFile('.git/hooks/husky.local.sh')
+  //   install({ userPkgDir: relativeUserPkgDir })
+  //   const localScript = readFile('.git/hooks/husky.local.sh')
 
-    expect(localScript).toMatch('cd "A/B/"')
-    expectHookToExist('.git/hooks/pre-commit')
+  //   expect(localScript).toMatch('cd "A/B/"')
+  //   expectHookToExist('.git/hooks/pre-commit')
 
-    uninstall({ userPkgDir: relativeUserPkgDir })
-    expect(exists('.git/hooks/husky.local.sh')).toBeFalsy()
-    expect(exists('.git/hooks/pre-commit')).toBeFalsy()
-  })
+  //   uninstall({ userPkgDir: relativeUserPkgDir })
+  //   expect(exists('.git/hooks/husky.local.sh')).toBeFalsy()
+  //   expect(exists('.git/hooks/pre-commit')).toBeFalsy()
+  // })
 
   it('should support git submodule', (): void => {
     const gitCommonDir = '.git/modules/A/B'

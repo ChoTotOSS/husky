@@ -2,25 +2,18 @@ import fs = require('fs')
 import path = require('path')
 import { getBanner } from './getBanner'
 
-export function getLocalScript(
-  pmName: string,
-  relativeUserPkgDir: string
-): string {
+export function getLocalScript(pmName: string): string {
   return `${getBanner()}
 
 packageManager=${pmName}
-cd "${relativeUserPkgDir}"
+cd "."
 `
 }
 
-export function createLocalScript(
-  gitHooksDir: string,
-  pmName: string,
-  relativeUserPkgDir: string
-): void {
+export function createLocalScript(gitHooksDir: string, pmName: string): void {
   fs.writeFileSync(
     path.join(gitHooksDir, 'husky.local.sh'),
-    getLocalScript(pmName, relativeUserPkgDir),
+    getLocalScript(pmName),
     'utf-8'
   )
 }

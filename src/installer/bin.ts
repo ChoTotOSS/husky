@@ -92,14 +92,13 @@ function run(): void {
     const INIT_CWD = getInitCwdEnv()
     const userPkgDir = getUserPkgDir(INIT_CWD)
     checkGitDirEnv()
-    const { absoluteGitCommonDir, relativeUserPkgDir } = getDirs(userPkgDir)
+    const { absoluteGitCommonDir } = getDirs(userPkgDir)
 
     if (action === 'install') {
       const { name: pmName } = whichPMRuns()
       debug(`Package manager: ${pmName}`)
       install({
         absoluteGitCommonDir,
-        relativeUserPkgDir,
         userPkgDir,
         pmName,
         isCI,
