@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 // Used to generate trees for docs.md
 const formatree = require('formatree')
 
