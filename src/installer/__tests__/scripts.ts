@@ -12,7 +12,8 @@ describe('hookScript', (): void => {
 
 describe('localScript', (): void => {
   it('should match snapshot', (): void => {
-    const script = getLocalScript('npm', '.')
+    // const script = getLocalScript('npm', '.')
+    const script = getLocalScript('npm')
     expect(script).toMatchSnapshot()
   })
 })
