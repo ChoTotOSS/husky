@@ -16,7 +16,7 @@ function getOldCommand(cwd: string, hookName: string): string | undefined {
   try {
     pkg = readPkg(cwd)
   } catch (err) {
-    if (err.code !== 'ENOENT') {
+    if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
       throw err
     }
   }

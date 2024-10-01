@@ -44,7 +44,8 @@
   ],
   "author": "Typicode <typicode@gmail.com>",
   "contributors": [
-    "Thanh Tran <thanhtran@chotot.vn> (https://chotot.com)"
+    "Thanh Tran <thanhtran@chotot.vn> (https://chotot.com)",
+    "Ngoc Tin Vo <tin.vongoc@chotot.vn> (https://chotot.com)"
   ],
   "license": "MIT",
   "bugs": {
@@ -57,39 +58,39 @@
     "compare-versions": "^3.6.0",
     "cosmiconfig": "^7.0.0",
     "find-versions": "^4.0.0",
-    "opencollective-postinstall": "^2.0.2",
+    "opencollective-postinstall": "^2.0.3",
     "pkg-dir": "^5.0.0",
     "please-upgrade-node": "^3.2.0",
     "slash": "^3.0.0",
-    "which-pm-runs": "^1.0.0"
+    "which-pm-runs": "^1.1.0"
   },
   "devDependencies": {
     "@types/ci-info": "^2.0.0",
     "@types/cosmiconfig": "^6.0.0",
     "@types/is-ci": "^2.0.0",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^29.5.13",
     "@types/mkdirp": "^1.0.0",
-    "@types/node": "^13.11.1",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
-    "cross-env": "^7.0.2",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "cross-env": "^7.0.3",
     "del": "^5.1.0",
     "del-cli": "^3.0.1",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-config-xo-space": "^0.24.0",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-xo-space": "^0.35.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "formatree": "^1.0.2",
-    "jest": "^25.3.0",
+    "jest": "^29.7.0",
     "markdown-toc": "^1.2.0",
     "mkdirp": "^1.0.4",
     "pinst": "^2.1.1",
-    "pkg-ok": "^2.3.1",
-    "prettier": "^2.0.4",
+    "pkg-ok": "^3.0.0",
+    "prettier": "^3.3.3",
     "tempy": "^0.5.0",
-    "ts-jest": "^25.3.1",
+    "ts-jest": "^29.2.5",
     "type-fest": "^0.13.1",
-    "typescript": "^3.8.3"
+    "typescript": "~5.5.0"
   },
   "jest": {
     "transform": {
