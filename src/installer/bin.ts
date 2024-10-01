@@ -109,8 +109,8 @@ function run(): void {
 
     console.log(`husky > Done`)
   } catch (err) {
-    console.log(chalk.red(err.message.trim()))
-    debug(err.stack)
+    console.log(chalk.red((err as NodeJS.ErrnoException).message.trim()))
+    debug(String((err as NodeJS.ErrnoException).stack))
     console.log(chalk.red(`husky > Failed to ${action}`))
   }
 }
